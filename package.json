@@ -3,13 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "dev": "node ./server",
+    "build": "next build && next export",
+    "start": "cross-env NODE_ENV=production node ./server"
   },
   "dependencies": {
-    "next": "9.3.3",
-    "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "next": "^9.3.3",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^1.0.3"
   }
 }
