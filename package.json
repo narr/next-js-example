@@ -5,7 +5,8 @@
     "dev": "node ./server",
     "typecheck": "tsc --noEmit",
     "eslint": "eslint **/*.{ts,tsx,js,jsx}",
-    "lint": "npm run typecheck && npm run eslint",
+    "eslint:fix": "npm run eslint -- --fix",
+    "lint": "run-p typecheck eslint",
     "build": "next build && next export",
     "start": "cross-env NODE_ENV=production node ./server"
   },
@@ -15,7 +16,7 @@
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
-    "@types/react": "^16.9.31",
+    "@types/react": "^16.9.32",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
     "cross-env": "^7.0.2",
@@ -26,7 +27,21 @@
     "eslint-plugin-react-hooks": "^3.0.0",
     "express": "^4.17.1",
     "http-proxy-middleware": "^1.0.3",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.1.1",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.0.2",
     "typescript": "^3.8.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": "eslint --cache --fix",
+    "*.{json,css,md}": [
+      "prettier --ignore-path ./.eslintignore --write"
+    ]
   }
 }
