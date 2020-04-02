@@ -27,12 +27,13 @@
     "wallabyjs.quokka-vscode",
     "chrmarti.regex",
     "humao.rest-client",
-    "shinnn.stylelint",
     "jock.svg",
     "wayou.vscode-todo-highlight",
     "chakrounanas.turbo-console-log",
     "pflannery.vscode-versionlens",
-    "deerawan.vscode-faker"
+    "deerawan.vscode-faker",
+    "andrewrazumovsky.vscode-styled-jsx-languageserver",
+    "blanu.vscode-styled-jsx"
   ],
   // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
   "unwantedRecommendations": []
