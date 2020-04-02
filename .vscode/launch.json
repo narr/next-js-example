@@ -1,0 +1,22 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Next Build",
+      "type": "node",
+      "request": "launch",
+      "protocol": "inspector",
+      "program": "${workspaceRoot}/node_modules/next/dist/bin/next",
+      "args": ["build"],
+      "stopOnEntry": true,
+      // https://code.visualstudio.com/docs/nodejs/nodejs-debugging#_breakpoint-validation
+      "runtimeArgs": ["--nolazy"],
+      "sourceMaps": false,
+      // show console.log
+      "outputCapture": "std"
+    }
+  ]
+}

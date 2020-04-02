@@ -1,3 +1,5 @@
+import React from 'react';
+
 export const Main = () => (
   <main>
     <h1 className="title">

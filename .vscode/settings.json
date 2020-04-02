@@ -1,0 +1,13 @@
+{
+  "files.eol": "\n",
+  "todohighlight.keywords": [
+    {
+      "text": "NOTE:",
+      "color": "#ddd",
+      "backgroundColor": "green"
+    }
+  ],
+  "turboConsoleLog.quote": "'",
+  "turboConsoleLog.addSemicolonInTheEnd": true,
+  "typescript.tsdk": "node_modules\\typescript\\lib"
+}

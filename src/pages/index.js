@@ -1,6 +1,7 @@
-import Head from "next/head";
-import { Main } from "../components/Main";
-import { Test } from "../containers/Test";
+import React from 'react';
+import Head from 'next/head';
+import { Main } from '../components/Main';
+import { Test } from '../containers/Test';
 
 const Home = () => (
   <div className="container">

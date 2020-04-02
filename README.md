@@ -1,4 +1,11 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app).
+<p align="center">
+  <a href="https://nextjs.org/">
+    <img src="https://assets.zeit.co/image/upload/v1538361091/repositories/next-js/next-js.png" alt="Next.js Logo">
+  </a>
+</p>
+<h1 align="center">
+  Narr's Next.js starter
+</h1>
 
 ## Getting Started
 
@@ -6,13 +13,11 @@ First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+You can start editing the page by modifying `src/pages/index.js`. The page auto-updates as you edit the file.
 
 ## Learn More
 

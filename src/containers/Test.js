@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable no-console */
+
+import React, { useState, useEffect } from 'react';
 
 const FETCH_URL =
-  process.env.NODE_ENV === "production" ? `https://api.github.com` : ``;
+  process.env.NODE_ENV === 'production' ? `https://api.github.com` : ``;
 
 export function Test() {
   const [page, setPage] = useState(1);
@@ -17,10 +19,10 @@ export function Test() {
       // `https://api.github.com/search/commits?q=repo:facebook/react+css&page=${page}`,
       `${FETCH_URL}/search/commits?q=repo:facebook/react+css&page=${page}`,
       {
-        method: "GET",
+        method: 'GET',
         headers: new Headers({
-          Accept: "application/vnd.github.cloak-preview"
-        })
+          Accept: 'application/vnd.github.cloak-preview',
+        }),
       }
     )
       .then(res => res.json())
@@ -45,7 +47,7 @@ export function Test() {
           {c.commit && (
             <>
               <div>
-                <h2 style={{ textDecoration: "Underline" }}>
+                <h2 style={{ textDecoration: 'Underline' }}>
                   {c.commit.committer.name}
                 </h2>
                 <p>{c.commit.message}</p>
