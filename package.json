@@ -8,7 +8,7 @@
     "eslint:fix": "npm run eslint -- --fix",
     "lint": "run-p typecheck eslint",
     "build": "next build && next export",
-    "start": "cross-env NODE_ENV=production node ./server"
+    "start": "cross-env NODE_ENV=production PORT=3001 node ./server"
   },
   "dependencies": {
     "next": "^9.3.4",
