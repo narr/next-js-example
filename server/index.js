@@ -12,13 +12,30 @@ const handle = app.getRequestHandler();
 app.prepare().then(() => {
   const server = express();
 
-  server.use(
-    ['/search'],
-    createProxyMiddleware({
-      target: 'https://api.github.com',
-      changeOrigin: true,
-    })
-  );
+  const proxyDelay = (req, res, next) => {
+    if (req.originalUrl === '/api/posts') {
+      // Delay request by 3 seconds
+      setTimeout(next, 3000);
+
+      // Delay response completion by 3 seconds
+      const endOriginal = res.end;
+      res.end = (...args) => {
+        setTimeout(() => {
+          endOriginal.apply(res, args);
+        }, 3000);
+      };
+    } else {
+      next();
+    }
+  };
+  const proxy = createProxyMiddleware({
+    target: 'https://jsonplaceholder.typicode.com',
+    changeOrigin: true,
+    pathRewrite: {
+      '^/api': '/',
+    },
+  });
+  server.use('/api', proxyDelay, proxy);
 
   server.all('*', (req, res) => {
     return handle(req, res);

@@ -1,15 +1,14 @@
 import React from 'react';
 
 type CardProps = {
-  link?: string;
   title: string;
   subTitle: string;
 };
 
 export const Card = (props: CardProps) => {
-  const { link, title, subTitle } = props;
+  const { title, subTitle } = props;
   return (
-    <a href={link} className="card">
+    <div className="card">
       <h3>{title} &rarr;</h3>
       <p>{subTitle}</p>
 
@@ -43,6 +42,6 @@ export const Card = (props: CardProps) => {
           line-height: 1.5;
         }
       `}</style>
-    </a>
+    </div>
   );
 };

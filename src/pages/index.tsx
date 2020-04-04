@@ -3,15 +3,18 @@ import { GlobalCss } from '../components/GlobalCss';
 import Head from 'next/head';
 import { Card } from '../components/Card';
 import { ZeitIcon } from '../components/ZeitIcon';
+import Link from 'next/link';
 
-const Home = () => {
+const HomePage = () => {
   return (
     <>
-      <GlobalCss />
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <GlobalCss />
+
       <div className="container">
         <main>
           <h1 className="title">
@@ -41,14 +44,31 @@ const Home = () => {
                   'Discover and deploy boilerplate example Next.js projects.',
               },
               {
-                link:
-                  'https://zeit.co/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app',
-                title: 'Deploy',
-                subTitle:
-                  'Instantly deploy your Next.js site to a public URL with ZEIT Now.',
+                link: '/posts',
+                title: 'Posts',
+                subTitle: 'A link to test File-System Routing of Nest.js',
               },
             ].map(data => {
-              return <Card key={data.title} {...data} />;
+              const { link, ...others } = data;
+              if (data.title === 'Posts') {
+                return (
+                  <Link key={data.title} href={link}>
+                    <a rel="noopener noreferrer">
+                      <Card {...others} />
+                    </a>
+                  </Link>
+                );
+              }
+              return (
+                <a
+                  key={data.title}
+                  href={link}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <Card {...others} />
+                </a>
+              );
             })}
           </div>
         </main>
@@ -127,7 +147,7 @@ const Home = () => {
             margin-top: 3rem;
           }
 
-          .grid :global(.card) {
+          .grid a {
             flex-basis: 45%;
           }
 
@@ -162,4 +182,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;
