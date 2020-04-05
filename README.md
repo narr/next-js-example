@@ -30,6 +30,14 @@ npm start
 
 Open [http://localhost:3001](http://localhost:3001) with your browser to see the result.
 
+### Webpack Bundle Analyzer
+
+Analyze build bundle:
+
+```bash
+npm run build:analyze
+```
+
 ### Static HTML Export
 
 **npm run build** allows you to export your app to static HTML, which can be run standalone without the need of a Node.js server. By default, it will be exported to **PROJECT ROOT FOLDER/out**
