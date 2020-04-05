@@ -3,6 +3,7 @@ import { GlobalCss } from '../components/GlobalCss';
 import Head from 'next/head';
 import { Posts } from '../containers/Posts';
 import { useRouter } from 'next/router';
+import FaceIcon from '@material-ui/icons/Face';
 
 const PostsPage = () => {
   const router = useRouter();
@@ -24,6 +25,7 @@ const PostsPage = () => {
             Get started by editing{' '}
             <code>{`src/pages${router.pathname}.tsx`}</code>
           </p>
+          <FaceIcon />
           <Posts />
         </main>
 

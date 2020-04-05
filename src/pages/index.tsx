@@ -4,8 +4,12 @@ import Head from 'next/head';
 import { Card } from '../components/Card';
 import { ZeitIcon } from '../components/ZeitIcon';
 import Link from 'next/link';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import { Modal } from '../components/Modal';
+import { useRouter } from 'next/router';
 
 const HomePage = () => {
+  const router = useRouter();
   return (
     <>
       <Head>
@@ -18,7 +22,8 @@ const HomePage = () => {
       <div className="container">
         <main>
           <h1 className="title">
-            Welcome to <a href="https://nextjs.org">Next.js!</a>
+            Welcome to <FavoriteIcon />{' '}
+            <a href="https://nextjs.org">Next.js!</a>
           </h1>
           <p className="description">
             Get started by editing <code>src/pages/index.tsx</code>
@@ -38,10 +43,9 @@ const HomePage = () => {
                   'Learn about Next.js in an interactive course with quizzes!',
               },
               {
-                link: 'https://github.com/zeit/next.js/tree/master/examples',
-                title: 'Examples',
-                subTitle:
-                  'Discover and deploy boilerplate example Next.js projects.',
+                link: '/modal',
+                title: 'Modal',
+                subTitle: 'A link to test a modal with route',
               },
               {
                 link: '/posts',
@@ -50,6 +54,15 @@ const HomePage = () => {
               },
             ].map(data => {
               const { link, ...others } = data;
+              if (data.title === 'Modal') {
+                return (
+                  <Link key={data.title} href={link}>
+                    <a rel="noopener noreferrer">
+                      <Card {...others} />
+                    </a>
+                  </Link>
+                );
+              }
               if (data.title === 'Posts') {
                 return (
                   <Link key={data.title} href={link}>
@@ -178,6 +191,14 @@ const HomePage = () => {
           }
         `}</style>
       </div>
+      <Modal
+        modalProps={{ open: router.pathname === '/modal' }}
+        closeButtonProps={{
+          onClick: () => {
+            router.push('/');
+          },
+        }}
+      />
     </>
   );
 };
