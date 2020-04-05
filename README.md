@@ -4,7 +4,7 @@
   </a>
 </p>
 <h1 align="center">
-  Narr's Next.js Starter
+  Narr's Next.js starter
 </h1>
 
 ## Getting Started
