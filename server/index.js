@@ -3,11 +3,18 @@
 const express = require('express');
 const next = require('next');
 const { createProxyMiddleware } = require('http-proxy-middleware');
+const HttpsProxyAgent = require('https-proxy-agent');
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
+
+// NOTE: this needs to be true if localhost is behind a coporate server and
+// make a request to an external URL (if it is an internal URL, it is not necessary)
+const needProxyAgent = false;
+const proxyServerUrl = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
+const proxyAgent = needProxyAgent && new HttpsProxyAgent(proxyServerUrl);
 
 app.prepare().then(() => {
   const server = express();
@@ -31,11 +38,16 @@ app.prepare().then(() => {
   const proxy = createProxyMiddleware({
     target: 'https://jsonplaceholder.typicode.com',
     changeOrigin: true,
+    secure: false,
+    agent: proxyAgent,
+    headers: {
+      Cookie: '',
+    },
     pathRewrite: {
       '^/api': '/',
     },
   });
-  server.use('/api', proxyDelay, proxy);
+  server.use(['/api'], proxyDelay, proxy);
 
   server.all('*', (req, res) => {
     return handle(req, res);

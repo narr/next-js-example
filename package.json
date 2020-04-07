@@ -32,6 +32,7 @@
     "eslint-plugin-react-hooks": "^3.0.0",
     "express": "^4.17.1",
     "http-proxy-middleware": "^1.0.3",
+    "https-proxy-agent": "^5.0.0",
     "husky": "^4.2.3",
     "lint-staged": "^10.1.2",
     "npm-run-all": "^4.1.5",
