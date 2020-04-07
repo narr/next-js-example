@@ -10,7 +10,7 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-// NOTE: this needs to be true if localhost is behind a coporate server and
+// NOTE: this needs to be true if localhost is behind a corporate server and
 // make a request to an external URL (if it is an internal URL, it is not necessary)
 const needProxyAgent = false;
 const proxyServerUrl = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
