@@ -13,6 +13,7 @@ module.exports = {
             loader: 'babel-loader',
             options: {
               presets: [['react-app', { flow: false, typescript: true }]],
+              plugins: ['styled-jsx/babel'],
             },
           },
         ],

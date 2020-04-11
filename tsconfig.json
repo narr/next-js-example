@@ -16,8 +16,12 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "esnext"
+    "target": "esnext",
+    "typeRoots": ["./node_modules/@types"]
   },
-  "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": [
+    "./node_modules/cypress-react-unit-test/lib/index.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
 }
