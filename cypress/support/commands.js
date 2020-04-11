@@ -16,7 +16,7 @@
 
 // NOTE: cc: custom command
 Cypress.Commands.add(
-  'cc_waitForInitialUIRenderDone',
+  'waitForInitialUIRenderDone',
   ({
     url,
     reqBeforeCallback,
