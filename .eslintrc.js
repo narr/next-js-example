@@ -6,6 +6,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
     'prettier/@typescript-eslint',
+    'plugin:cypress/recommended',
   ],
   plugins: ['react-hooks'],
   env: {
@@ -46,5 +47,6 @@ module.exports = {
     ],
     '@typescript-eslint/no-use-before-define': ['error', 'nofunc'],
     '@typescript-eslint/no-var-requires': 'off',
+    'cypress/no-unnecessary-waiting': 'off',
   },
 };

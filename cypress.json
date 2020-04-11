@@ -1,0 +1,18 @@
+{
+  "baseUrl": "http://localhost:3000",
+  "custom": {
+    "pages": {
+      "default": "/",
+      "posts": "/posts"
+    },
+    "mockServerPort": 3030,
+    "waitTime": 0
+  },
+  "fixturesFolder": "assets",
+  "ignoreTestFiles": "**/examples/*.spec.*",
+  "integrationFolder": "cypress/integration",
+  "testFiles": "**/*.spec.*",
+  "video": false,
+  "viewportHeight": 1080,
+  "viewportWidth": 1920
+}

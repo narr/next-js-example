@@ -51,7 +51,7 @@ export const Posts = () => {
         <h2 style={{ color: 'yellowgreen' }}>Wait I'm Loading posts for you</h2>
       )}
       {posts.map(p => (
-        <div key={p.id}>
+        <div key={p.id} data-testid="post">
           <div>
             <h2 style={{ textDecoration: 'Underline' }}>{p.title}</h2>
             <p>{p.body}</p>

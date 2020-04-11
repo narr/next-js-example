@@ -1,9 +1,14 @@
 /* eslint-disable no-console */
 
 const express = require('express');
+const morgan = require('morgan');
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const next = require('next');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const HttpsProxyAgent = require('https-proxy-agent');
+const { getPathRelativeToAssets } = require('./utils');
+const { getApiHandler } = require('./routes');
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
@@ -18,6 +23,17 @@ const proxyAgent = needProxyAgent && new HttpsProxyAgent(proxyServerUrl);
 
 app.prepare().then(() => {
   const server = express();
+  server.use(morgan('dev'));
+  server.use(cors());
+  server.use(cookieParser());
+  // Below seems likes no more issue with the latest version of express and
+  // http-proxy-middleware
+  // https://github.com/chimurai/http-proxy-middleware/issues/232
+  server.use(express.json());
+  server.use(express.urlencoded({ extended: true }));
+
+  server.use('/assets', express.static(getPathRelativeToAssets('')));
+  server.use('/api/posts', getApiHandler('getAllPosts'));
 
   const proxyDelay = (req, res, next) => {
     if (req.originalUrl === '/api/posts') {

@@ -30,3 +30,7 @@ yarn-error.log*
 
 # Visual Studio Code
 .history
+
+# cypress
+cypress/integration/examples
+cypress/screenshots
