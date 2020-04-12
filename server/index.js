@@ -1,39 +1,56 @@
 /* eslint-disable no-console */
 
 const express = require('express');
-const morgan = require('morgan');
-const cors = require('cors');
-const cookieParser = require('cookie-parser');
-const next = require('next');
-const { createProxyMiddleware } = require('http-proxy-middleware');
-const HttpsProxyAgent = require('https-proxy-agent');
-const { getPathRelativeToAssets } = require('./utils');
-const { getApiHandler } = require('./routes');
+const { getPathRelativeToAssets, getPathRelativeToRoot } = require('./utils');
+const server = express();
 
-const port = parseInt(process.env.PORT, 10) || 3000;
-const dev = process.env.NODE_ENV !== 'production';
-const app = next({ dev });
-const handle = app.getRequestHandler();
+function baseSetup() {
+  const morgan = require('morgan');
+  const cors = require('cors');
+  const cookieParser = require('cookie-parser');
+  const { getApiHandler } = require('./routes');
 
-// NOTE: this needs to be true if localhost is behind a corporate server and
-// make a request to an external URL (if it is an internal URL, it is not necessary)
-const needProxyAgent = false;
-const proxyServerUrl = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
-const proxyAgent = needProxyAgent && new HttpsProxyAgent(proxyServerUrl);
-
-app.prepare().then(() => {
-  const server = express();
   server.use(morgan('dev'));
   server.use(cors());
   server.use(cookieParser());
-  // Below seems likes no more issue with the latest version of express and
-  // http-proxy-middleware
+  // NOTE: Below seems likes no more issue with the latest version of express
+  // and http-proxy-middleware
   // https://github.com/chimurai/http-proxy-middleware/issues/232
   server.use(express.json());
   server.use(express.urlencoded({ extended: true }));
-
   server.use('/assets', express.static(getPathRelativeToAssets('')));
   server.use('/api/posts', getApiHandler('getAllPosts'));
+}
+
+function start() {
+  const port = parseInt(process.env.PORT, 10) || 3000;
+  server.listen(port, () => {
+    console.log(`> Ready on http://localhost:${port}`);
+  });
+}
+
+baseSetup();
+
+if (process.env.NODE_ENV === 'build') {
+  // pages
+  server.use(/\/([a-z]+)$/, (req, res) => {
+    const htmlPath = `out/${req.params[0]}.html`;
+    res.sendFile(getPathRelativeToRoot(htmlPath));
+  });
+  server.use('/', express.static(getPathRelativeToRoot('out')));
+  start();
+  return;
+}
+
+function proxySetup() {
+  const HttpsProxyAgent = require('https-proxy-agent');
+  const { createProxyMiddleware } = require('http-proxy-middleware');
+
+  // NOTE: this needs to be true if localhost is behind a corporate server and
+  // make a request to an external URL (if it is an internal URL, it is not necessary)
+  const needProxyAgent = false;
+  const proxyServerUrl = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
+  const proxyAgent = needProxyAgent && new HttpsProxyAgent(proxyServerUrl);
 
   const proxyDelay = (req, res, next) => {
     if (req.originalUrl === '/api/posts') {
@@ -64,12 +81,20 @@ app.prepare().then(() => {
     },
   });
   server.use(['/api'], proxyDelay, proxy);
+}
 
+function nextSetup() {
+  const next = require('next');
+  const dev = process.env.NODE_ENV !== 'production';
+  const app = next({ dev });
+  const handle = app.getRequestHandler();
   server.all('*', (req, res) => {
     return handle(req, res);
   });
-
-  server.listen(port, () => {
-    console.log(`> Ready on http://localhost:${port}`);
+  app.prepare().then(() => {
+    start();
   });
-});
+}
+
+proxySetup();
+nextSetup();

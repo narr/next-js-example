@@ -16,7 +16,10 @@ describe('/posts - on load', () => {
     cy.waitForInitialUIRenderDone({
       url: customConfigs.pages.posts,
       reqBeforeCallback: request => {
-        if (request.url.match(/api\/posts/)) {
+        if (request.url.match(/\/posts/)) {
+          // NOTE: if URL is https://jsonplaceholder.typicode.com/posts
+          // change to '/api/posts' to use mock data
+          request.url = '/api/posts';
           request.headers[mockConfigs.customHeaderFilePath] = 'getAllPosts.js';
           request.headers[mockConfigs.customHeaderName] = 'ok';
         }

@@ -6,12 +6,16 @@
     "typecheck": "tsc --noEmit",
     "eslint": "eslint **/*.{ts,tsx,js,jsx}",
     "eslint:fix": "npm run eslint -- --fix",
-    "lint": "run-p typecheck eslint",
+    "lint": "run-p --print-label typecheck eslint",
     "test:unit": "cypress open --config integrationFolder=./src",
     "test:e2e": "cypress open --config baseUrl=http://localhost:3000",
+    "test:ci": "cypress run --browser chrome --headless --config baseUrl=http://localhost:3001,integrationFolder=./",
+    "ci:e2e": "run-p --print-label --race serve test:ci",
+    "ci": "run-p lint ci:e2e",
     "build": "next build && next export",
     "build:analyze": "cross-env ANALYZE=true npm run build",
-    "start": "cross-env NODE_ENV=production PORT=3001 node ./server"
+    "start": "cross-env NODE_ENV=production PORT=3001 node ./server",
+    "serve": "cross-env NODE_ENV=build PORT=3001 node ./server"
   },
   "dependencies": {
     "@material-ui/core": "^4.9.10",
