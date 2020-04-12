@@ -25,6 +25,9 @@ import './commands';
 // @ workaround for an issue - https://github.com/cypress-io/cypress/issues/521
 before(() => {
   const baseUrl = Cypress.config('baseUrl');
+  if (baseUrl == null) {
+    return;
+  }
   const xHookUrl = `${baseUrl}/assets/js/xhook.min.js`;
   cy.request(xHookUrl).then(response => {
     cy.window().then(win => {
