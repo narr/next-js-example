@@ -14,6 +14,7 @@
 
 const wp = require('@cypress/webpack-preprocessor');
 const webpackOptions = require('../../webpack.config');
+const coverageTask = require('@cypress/code-coverage/task');
 
 /**
  * @type {Cypress.PluginConfig}
@@ -28,4 +29,8 @@ module.exports = (on, config) => {
   // NOTE: https://github.com/facebook/create-react-app/issues/2377#issuecomment-304446190
   process.env.NODE_ENV = 'development';
   on('file:preprocessor', wp(options));
+  coverageTask(on, config);
+  // NOTE: IMPORTANT to return the config object
+  // with the any changed environment variables
+  return config;
 };
