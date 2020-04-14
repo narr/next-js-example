@@ -8,7 +8,12 @@
     "waitTime": 0
   },
   "fixturesFolder": "assets",
-  "ignoreTestFiles": ["**/examples/*.spec.*"],
+  "ignoreTestFiles": [
+    "**/examples/*.spec.*",
+    "**/node_modules/**",
+    "**/coverage/**",
+    "**/out/**"
+  ],
   "integrationFolder": "cypress/integration",
   "testFiles": ["**/*.cspec.*"],
   "video": false,

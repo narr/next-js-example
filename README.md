@@ -19,6 +19,14 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `src/pages/index.tsx`. The page auto-updates as you edit the file.
 
+Second, run tests:
+
+```bash
+npm run test:all
+```
+
+It will open Cypress for Unit tests and E2E tests.
+
 ## Build
 
 Run the development server with build files:
