@@ -26,8 +26,6 @@ module.exports = (on, config) => {
   const options = {
     webpackOptions,
   };
-  // NOTE: https://github.com/facebook/create-react-app/issues/2377#issuecomment-304446190
-  process.env.NODE_ENV = 'development';
   on('file:preprocessor', wp(options));
   coverageTask(on, config);
   // NOTE: IMPORTANT to return the config object
