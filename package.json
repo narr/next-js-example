@@ -14,7 +14,7 @@
     "test:e2e:base": "cypress open --config baseUrl=http://localhost:3000",
     "test:e2e": "cross-env CYPRESS_coverage=false npm run test:e2e:base",
     "test:e2e:coverage": "cross-env CYPRESS_coverage=true npm run test:e2e:base",
-    "test:all:base": "cypress open --config baseUrl=http://localhost:3000,integrationFolder=./",
+    "test:all:base": "cypress open --config baseUrl=http://localhost:3000,integrationFolder=./,testFiles={cypress/integration/**/*.cspec.*,src/**/*.cspec.*}",
     "test:all": "cross-env CYPRESS_coverage=false npm run test:all:base",
     "test:all:coverage": "cross-env CYPRESS_coverage=true npm run test:all:base",
     "test:ci": "cross-env CYPRESS_coverage=true cypress run --browser chrome --headless --config baseUrl=http://localhost:3001,integrationFolder=./",
