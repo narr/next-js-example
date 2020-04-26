@@ -7,6 +7,8 @@
   Narr's Next.js starter
 </h1>
 
+![CI](https://github.com/narr/next-js-example/workflows/CI/badge.svg?branch=master)
+
 ## Getting Started
 
 First, run the development server:
