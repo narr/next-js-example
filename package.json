@@ -17,9 +17,12 @@
     "test:all:base": "cypress open --config baseUrl=http://localhost:3000,integrationFolder=./,testFiles={cypress/integration/**/*.cspec.*,src/**/*.cspec.*}",
     "test:all": "cross-env CYPRESS_coverage=false npm run test:all:base",
     "test:all:coverage": "cross-env CYPRESS_coverage=true npm run test:all:base",
-    "test:ci": "cross-env CYPRESS_coverage=true cypress run --browser chrome --headless --config baseUrl=http://localhost:3001,integrationFolder=./",
-    "ci:e2e": "run-p --print-label --race serve test:ci",
-    "ci": "run-p lint ci:e2e",
+    "test:ci:base": "cross-env CYPRESS_coverage=true cypress run --browser chrome --headless",
+    "test:ci:unit": "cross-env CYPRESS_integrationFolder=./src npm run test:ci:base",
+    "test:ci:e2e": "cross-env CYPRESS_baseUrl=http://localhost:3001 npm run test:ci:base",
+    "test:ci:all": "cross-env CYPRESS_baseUrl=http://localhost:3001 CYPRESS_integrationFolder=./ CYPRESS_testFiles=\"{cypress/integration/**/*.cspec.*,src/**/*.cspec.*}\" npm run test:ci:base",
+    "ci:test": "run-p --print-label --race serve test:ci:all",
+    "ci": "run-p lint ci:test",
     "build": "next build && next export",
     "build:analyze": "cross-env ANALYZE=true npm run build",
     "build:coverage": "cross-env CYPRESS_coverage=true npm run build",
@@ -79,6 +82,11 @@
   },
   "nyc": {
     "extends": "@istanbuljs/nyc-config-typescript",
-    "all": true
+    "include": [
+      "src/**/*"
+    ],
+    "exclude": [
+      "**/*.*spec.*"
+    ]
   }
 }

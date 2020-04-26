@@ -8,18 +8,34 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  build:
+  base:
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1.4.2
+      - uses: actions/setup-node@v1
         with:
           # NOTE: install the latest node version
           node-version: '*'
 
-      - name: Run npm install and lint
-        run: |
-          npm install
-          npm run lint
+      - name: Run npm install
+        run: npm install
+
+      - name: Run lint
+        run: npm run lint
+
+      - name: Run unit tests
+        uses: npm run test:ci:unit
+
+  e2e:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '*'
+
+      - name: Run npm install
+        run: npm install
