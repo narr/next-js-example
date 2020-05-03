@@ -1,4 +1,5 @@
 import React from 'react';
+import { mount } from 'cypress-react-unit-test';
 import { ZeitIcon } from './index';
 import { test } from './test';
 
@@ -10,7 +11,7 @@ describe('ZeitIcon component', () => {
   });
 
   it(`should render correctly`, () => {
-    cy.mount(<ZeitIcon />);
+    mount(<ZeitIcon />);
     cy.wait(customConfigs.waitTime).get('svg').should('be.visible');
   });
 });
