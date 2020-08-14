@@ -12,22 +12,46 @@
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
-const wp = require('@cypress/webpack-preprocessor');
-const webpackOptions = require('../../webpack.config');
 const coverageTask = require('@cypress/code-coverage/task');
+const wp = require('@cypress/webpack-preprocessor');
 
 /**
  * @type {Cypress.PluginConfig}
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
+  coverageTask(on, config);
+
   const options = {
-    webpackOptions,
+    webpackOptions: {
+      resolve: {
+        extensions: ['.js', '.ts', '.tsx'],
+      },
+      module: {
+        rules: [
+          {
+            test: /\.(ts|tsx)$/,
+            use: [
+              {
+                loader: 'babel-loader',
+              },
+            ],
+          },
+        ],
+      },
+    },
   };
   on('file:preprocessor', wp(options));
-  coverageTask(on, config);
+
+  // NOTE: https://github.com/cypress-io/cypress/issues/6540#issuecomment-641087834
+  on('before:browser:launch', (browser, launchOptions) => {
+    if (browser.name === 'chrome' && browser.isHeadless) {
+      launchOptions.args.push('--disable-gpu');
+      return launchOptions;
+    }
+  });
+
   // NOTE: IMPORTANT to return the config object
   // with the any changed environment variables
   return config;

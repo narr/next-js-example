@@ -1,16 +1,10 @@
-// in cypress/support/index.d.ts
-// load type definitions that come with Cypress module
-/// <reference types="cypress" />
-
 declare namespace Cypress {
-  interface ConfigOptions {
+  interface ResolvedConfigOptions {
     custom: {
-      pages: {
-        default: string;
-        posts: string;
+      components: {
+        [k: string]: string;
       };
-      mockServerPort: number;
-      waitTime: number;
+      logWaitTime: number;
     };
   }
 
@@ -22,7 +16,7 @@ declare namespace Cypress {
       selectorToCheckUiRenderDone,
     }: {
       url: string;
-      reqBeforeCallback?: (request: any, proxy: VoidFunction) => void;
+      reqBeforeCallback?: (request: any) => void;
       reqAfterCallback?: (request: any, response: any) => void;
       selectorToCheckUiRenderDone?: any[];
     }): VoidFunction;

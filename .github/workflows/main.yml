@@ -23,30 +23,13 @@ jobs:
         run: |
           node -v
           npm -v
+          yarn -v
 
-      - name: Run npm install
-        run: npm install
+      - name: Install
+        run: yarn
 
-      - name: Run lint
-        run: npm run lint
+      - name: Lint
+        run: yarn lint
 
-      - name: Run unit tests
-        run: npm run test:ci:unit
-
-  e2e:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '*'
-
-      - name: Run npm install
-        run: npm install
-
-      - name: Run build
-        run: npm run build:coverage
-
-      - name: Run e2e test
-        run: npm run ci:test:e2e
+      - name: Test
+        run: yarn test:ci

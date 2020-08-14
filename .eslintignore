@@ -1,8 +1,10 @@
+!.storybook
+.history
+.next
+.nyc_output
+coverage
 tmp
 *.min.js
-
-build
 out
-
-docs
 cypress/integration/examples
+cypress/fixtures/example.json

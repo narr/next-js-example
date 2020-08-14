@@ -3,11 +3,27 @@ module.exports = function (api) {
   api.cache(true);
 
   const plugins = [];
-  if (process.env.CYPRESS_coverage) {
-    plugins.push('istanbul');
+  if (process.env.COVERAGE) {
+    plugins.push([
+      'istanbul',
+      {
+        exclude: ['**/.storybook', '**/*.stories.*', '**/*.cspec.*'],
+      },
+    ]);
   }
   return {
-    presets: ['next/babel'],
+    presets: [
+      [
+        'next/babel',
+        {
+          'preset-env': {
+            targets: {
+              browsers: ['last 2 Chrome versions'],
+            },
+          },
+        },
+      ],
+    ],
     plugins,
   };
 };

@@ -1,21 +1,18 @@
 {
+  "baseUrl": "http://localhost:6006",
   "custom": {
-    "mockServerPort": 3030,
-    "pages": {
-      "default": "/",
-      "posts": "/posts"
+    "components": {
+      "example-button--primary": "/iframe.html?id=example-button--primary&viewMode=story",
+      "test-homepage--base": "/iframe.html?id=test-homepage--base&viewMode=story",
+      "test-postspage--base": "/iframe.html?id=test-postspage--base&viewMode=story",
+      "components-card--base": "/iframe.html?id=components-card--base&viewMode=story"
     },
-    "waitTime": 0
+    "logWaitTime": 0
   },
-  "fixturesFolder": "assets",
-  "ignoreTestFiles": [
-    "**/examples/*.spec.*",
-    "**/node_modules/**",
-    "**/coverage/**",
-    "**/out/**"
-  ],
-  "integrationFolder": "cypress/integration",
-  "testFiles": ["**/*.cspec.*"],
+  "defaultCommandTimeout": 10000,
+  "ignoreTestFiles": ["**/examples/*.spec.*", "**/node_modules/**"],
+  "integrationFolder": ".",
+  "testFiles": ["./cypress/integration/**/*.cspec.*", "./src/**/*.cspec.*"],
   "video": false,
   "viewportHeight": 1080,
   "viewportWidth": 1920

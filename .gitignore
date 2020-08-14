@@ -34,4 +34,5 @@ yarn-error.log*
 
 # cypress
 cypress/integration/examples
+cypress/fixtures/example.json
 cypress/screenshots

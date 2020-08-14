@@ -17,11 +17,8 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext",
-    "typeRoots": ["./node_modules/@types"]
+    "types": []
   },
-  "include": [
-    "./node_modules/cypress-react-unit-test/lib/index.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ]
+  "include": ["./@types", "./cypress", "./src"],
+  "exclude": ["node_modules"]
 }

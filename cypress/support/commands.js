@@ -14,7 +14,6 @@
 // -- This is a parent command --
 // Cypress.Commands.add("login", (email, password) => { ... })
 
-// NOTE: cc: custom command
 Cypress.Commands.add(
   'waitForInitialUIRenderDone',
   ({
@@ -23,7 +22,6 @@ Cypress.Commands.add(
     reqAfterCallback,
     selectorToCheckUiRenderDone,
   }) => {
-    const customConfigs = Cypress.config('custom');
     cy.setCookie('mock_server', 'true');
     cy.visit(url, {
       onBeforeLoad: win => {
@@ -31,18 +29,7 @@ Cypress.Commands.add(
 
         if (reqBeforeCallback) {
           win.xhook.before(request => {
-            request.withCredentials = false;
-            const proxy = () => {
-              // NOTE: proxy a request (xhr or fetch) to Cypress sever port if
-              // the html is served from a different server
-              if (request.url.indexOf(customConfigs.mockServerPort) < 0) {
-                request.url = request.url.replace(
-                  /:[0-9]+\//,
-                  `:${customConfigs.mockServerPort}/`
-                );
-              }
-            };
-            reqBeforeCallback(request, proxy);
+            reqBeforeCallback(request);
           });
         }
 

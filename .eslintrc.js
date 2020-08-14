@@ -11,16 +11,10 @@ module.exports = {
   plugins: ['react-hooks'],
   env: {
     browser: true,
+    es2020: true,
     node: true,
   },
-  globals: {
-    jest: true,
-  },
   parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaVersion: 2018,
-    sourceType: 'module',
-  },
   settings: {
     react: {
       // Tells eslint-plugin-react to automatically detect the version of React to use
@@ -41,6 +35,7 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
     'react-hooks/rules-of-hooks': 'error',
     '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-unused-vars': [
       'error',
       { ignoreRestSiblings: true },

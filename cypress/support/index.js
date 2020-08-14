@@ -15,9 +15,8 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
-import '@cypress/code-coverage/support';
-import 'cypress-react-unit-test';
 // Import commands.js using ES2015 syntax:
+import '@cypress/code-coverage/support';
 import './commands';
 
 // Alternatively you can use CommonJS syntax:
@@ -25,11 +24,7 @@ import './commands';
 
 // @ workaround for an issue - https://github.com/cypress-io/cypress/issues/521
 before(() => {
-  const baseUrl = Cypress.config('baseUrl');
-  if (baseUrl == null) {
-    return;
-  }
-  const xHookUrl = `${baseUrl}/assets/js/xhook.min.js`;
+  const xHookUrl = '/assets/js/xhook.min.js';
   cy.request(xHookUrl).then(response => {
     cy.window().then(win => {
       // NOTE: to share xhookResponse with test window even after it refreshes

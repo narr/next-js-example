@@ -1,7 +1,7 @@
 import React from 'react';
-import { GlobalCss } from '../components/GlobalCss';
+import { GlobalCss } from '../../components/GlobalCss';
 import Head from 'next/head';
-import { Posts } from '../containers/Posts';
+import { Posts } from '../../components/Posts';
 import { useRouter } from 'next/router';
 import FaceIcon from '@material-ui/icons/Face';
 

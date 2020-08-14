@@ -3,11 +3,13 @@ describe('/ - on load', () => {
 
   it(`should show UIs correctly after initial loading`, () => {
     cy.waitForInitialUIRenderDone({
-      url: customConfigs.pages.default,
+      url: customConfigs.components['test-homepage--base'],
       selectorToCheckUiRenderDone: ['Welcome to Next.js!'],
     });
 
-    cy.log(`**should show all link titles below**`);
+    cy.log(`**should show all link titles below**`).wait(
+      customConfigs.logWaitTime
+    );
     cy.contains('h3', 'Documentation').should('be.visible');
     cy.contains('h3', 'Learn').should('be.visible');
     cy.contains('h3', 'Modal').should('be.visible');

@@ -1,11 +1,11 @@
 import React from 'react';
-import { GlobalCss } from '../components/GlobalCss';
+import { GlobalCss } from '../../components/GlobalCss';
 import Head from 'next/head';
-import { Card } from '../components/Card';
-import { ZeitIcon } from '../components/ZeitIcon';
+import { Card } from '../../components/Card';
+import { ZeitIcon } from '../../components/ZeitIcon';
 import Link from 'next/link';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import { Modal } from '../components/Modal';
+import { Modal } from '../../components/Modal';
 import { useRouter } from 'next/router';
 
 const HomePage = () => {
@@ -26,7 +26,7 @@ const HomePage = () => {
             <a href="https://nextjs.org">Next.js!</a>
           </h1>
           <p className="description">
-            Get started by editing <code>src/pages/index.tsx</code>
+            Get started by editing <code>src/pages/test/index.tsx</code>
           </p>
           <div className="grid">
             {[
@@ -43,12 +43,12 @@ const HomePage = () => {
                   'Learn about Next.js in an interactive course with quizzes!',
               },
               {
-                link: '/modal',
+                link: '/test/modal',
                 title: 'Modal',
                 subTitle: 'A link to test a modal with route',
               },
               {
-                link: '/posts',
+                link: '/test/posts',
                 title: 'Posts',
                 subTitle: 'A link to test File-System Routing of Nest.js',
               },
@@ -192,10 +192,10 @@ const HomePage = () => {
         `}</style>
       </div>
       <Modal
-        modalProps={{ open: router.pathname === '/modal' }}
+        modalProps={{ open: router.pathname === '/test/modal' }}
         closeButtonProps={{
           onClick: () => {
-            router.push('/');
+            router.push('/test');
           },
         }}
       />
