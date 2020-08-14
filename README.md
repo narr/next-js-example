@@ -8,23 +8,25 @@
 </h1>
 
 ![CI](https://github.com/narr/next-js-example/workflows/CI/badge.svg?branch=master)
+[![codecov](https://codecov.io/gh/narr/next-js-example/branch/master/graph/badge.svg)](https://codecov.io/gh/narr/next-js-example)
 
 ## Getting Started
 
 First, run the development server:
 
 ```bash
-npm run dev
+yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `src/pages/index.tsx`. The page auto-updates as you edit the file.
+You can start editing the page by modifying `src/pages/test/index.tsx`. The page auto-updates as you edit the file.
 
 Second, run tests:
 
 ```bash
-npm run test:all
+yarn storybook
+yarn test
 ```
 
 It will open Cypress for Unit tests and E2E tests.
@@ -34,8 +36,8 @@ It will open Cypress for Unit tests and E2E tests.
 Run the development server with build files:
 
 ```bash
-npm run build
-npm start
+yarn build
+yarn start
 ```
 
 Open [http://localhost:3001](http://localhost:3001) with your browser to see the result.
@@ -45,9 +47,9 @@ Open [http://localhost:3001](http://localhost:3001) with your browser to see the
 Analyze build bundle:
 
 ```bash
-npm run build:analyze
+yarn build:analyze
 ```
 
 ### Static HTML Export
 
-**npm run build** allows you to export your app to static HTML, which can be run standalone without the need of a Node.js server. By default, it will be exported to **PROJECT ROOT FOLDER/out**
+**yarn build** allows you to export your app to static HTML, which can be run standalone without the need of a Node.js server. By default, it will be exported to **PROJECT ROOT FOLDER/out**
