@@ -1,10 +1,10 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { CurvedLineChart, CurvedLineChartProps } from './CurvedLineChart';
+import { CurvedLineChart, CurvedLineChartProps } from '.';
 
 export default {
-  title: 'D3/CurvedLineChart',
+  title: 'Components/CurvedLineChart',
   component: CurvedLineChart,
   argTypes: {},
 } as Meta;

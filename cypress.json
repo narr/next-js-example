@@ -5,7 +5,8 @@
       "example-button--primary": "/iframe.html?id=example-button--primary&viewMode=story",
       "test-homepage--base": "/iframe.html?id=test-homepage--base&viewMode=story",
       "test-postspage--base": "/iframe.html?id=test-postspage--base&viewMode=story",
-      "components-card--base": "/iframe.html?id=components-card--base&viewMode=story"
+      "components-card--base": "/iframe.html?id=components-card--base&viewMode=story",
+      "components-curvedlinechart--base": "/iframe.html?id=components-curvedlinechart--base&viewMode=story"
     },
     "logWaitTime": 0
   },
