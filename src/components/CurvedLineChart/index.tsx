@@ -1,5 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { select, line, curveCardinal } from 'd3';
+import {
+  select,
+  line,
+  curveCardinal,
+  scaleLinear,
+  axisBottom,
+  axisRight,
+} from 'd3';
 
 export interface CurvedLineChartProps {
   /**
@@ -11,22 +18,49 @@ export interface CurvedLineChartProps {
 export const CurvedLineChart: React.FC<CurvedLineChartProps> = () => {
   const [data, setData] = useState([25, 30, 45, 60, 20, 65, 75]);
   const svgRef = useRef<SVGSVGElement>(null);
+
   useEffect(() => {
     const svg = select(svgRef.current);
-    const myLine = line<number>()
-      .x((_value, index) => index * 50)
-      .y((value, index) => {
-        if (index > 0) {
-          return 150 - value;
-        }
-        return svgRef.current?.scrollHeight ?? 150;
+    const svgWidth = svgRef.current?.scrollWidth ?? 300;
+    const svgHeight = svgRef.current?.scrollHeight ?? 150;
+
+    const xScale = scaleLinear()
+      .domain([0, data.length - 1])
+      .range([0, svgWidth]);
+    const yScale = scaleLinear().domain([0, svgHeight]).range([svgHeight, 0]);
+
+    const xAxis = axisBottom<number>(xScale)
+      .ticks(data.length)
+      .tickFormat(data => String(data + 1));
+    svg
+      .selectAll('.x-axis')
+      .data([0])
+      .join(enter => {
+        return enter.append('g').call(xAxis);
       })
+      .attr('class', 'x-axis')
+      .style('transform', `translateY(${svgHeight}px)`);
+
+    const yAxis = axisRight(yScale).tickSizeOuter(0);
+    svg
+      .selectAll('.y-axis')
+      .data([0])
+      .join(enter => {
+        return enter.append('g').call(yAxis);
+      })
+      .attr('class', 'y-axis')
+      .style('transform', `translateX(${svgWidth}px)`);
+
+    const myLine = line<number>()
+      .x((_value, index) => xScale(index))
+      .y(yScale)
       .curve(curveCardinal);
     svg
-      .selectAll('path')
+      .selectAll('.line')
       .data([data])
       .join('path')
-      .attr('d', value => myLine(value))
+      .attr('class', 'line')
+      .attr('d', myLine)
       .attr('fill', 'none')
       .attr('stroke', 'blue');
   }, [data]);
@@ -34,8 +68,9 @@ export const CurvedLineChart: React.FC<CurvedLineChartProps> = () => {
   return (
     <>
       <div className="view">
-        <svg ref={svgRef}></svg>
+        <svg ref={svgRef} style={{ overflow: 'visible' }} />
       </div>
+      <br />
       <br />
       <button onClick={() => setData(data.map(v => v + 5))}>Update Data</button>
       &nbsp;&nbsp;
