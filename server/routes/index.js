@@ -52,15 +52,15 @@ module.exports = app => {
   app.use(express.urlencoded({ extended: true }));
 
   app.use('/api/posts', (req, res, next) => {
-    if (req.cookies.mock_server === 'true') {
-      timeouts.read();
-      const timeout = timeouts.get('getPosts') || 0;
-      setTimeout(() => {
-        postCtrl.getPosts(req, res);
-      }, timeout);
+    if (req.cookies.no_mock_api === 'true') {
+      next();
       return;
     }
-    next();
+    timeouts.read();
+    const timeout = timeouts.get('getPosts') || 0;
+    setTimeout(() => {
+      postCtrl.getPosts(req, res);
+    }, timeout);
   });
 
   setProxy(app);

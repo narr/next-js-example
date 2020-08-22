@@ -1,11 +1,14 @@
 import React from 'react';
 import { GlobalCss } from '../../components/GlobalCss';
 import Head from 'next/head';
-import { Posts } from '../../components/Posts';
+import { Posts, PostsProps } from '../../components/Posts';
 import { useRouter } from 'next/router';
 import FaceIcon from '@material-ui/icons/Face';
 
-const PostsPage = () => {
+export type PostsPageProps = PostsProps;
+
+const PostsPage = (props: PostsPageProps) => {
+  const { onPostsLoad } = props;
   const router = useRouter();
   return (
     <>
@@ -23,10 +26,10 @@ const PostsPage = () => {
           </h1>
           <p className="description">
             Get started by editing{' '}
-            <code>{`src/pages${router.pathname}.tsx`}</code>
+            <code>{`src/pages${router.pathname || '/test/posts'}.tsx`}</code>
           </p>
           <FaceIcon />
-          <Posts />
+          <Posts onPostsLoad={onPostsLoad} />
         </main>
 
         <style jsx>{`

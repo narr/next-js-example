@@ -31,6 +31,20 @@ yarn test
 
 It will open Cypress for Unit tests and E2E tests.
 
+Third, run visual regression tests:
+
+```bash
+# https://loki.js.org/command-line-arguments.html#loki-test
+
+# to test all stories
+yarn storybook
+yarn test:visual
+
+# to use regular expression for stories to test
+# Below will only test stories whose name has the string, 'card'
+yarn test:visual:filter card
+```
+
 ## Build
 
 Run the development server with build files:

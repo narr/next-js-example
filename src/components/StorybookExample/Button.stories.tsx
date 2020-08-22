@@ -23,15 +23,24 @@ export const Secondary = Template.bind({});
 Secondary.args = {
   label: 'Button',
 };
+Secondary.parameters = {
+  loki: { skip: true },
+};
 
 export const Large = Template.bind({});
 Large.args = {
   size: 'large',
   label: 'Button',
 };
+Large.parameters = {
+  loki: { skip: true },
+};
 
 export const Small = Template.bind({});
 Small.args = {
   size: 'small',
   label: 'Button',
+};
+Small.parameters = {
+  loki: { skip: true },
 };

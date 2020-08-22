@@ -9,12 +9,18 @@ type Post = {
   body: string;
 };
 
+export interface PostsProps {
+  onPostsLoad?: VoidFunction;
+}
+
 const API_URL_POST =
   process.env.NODE_ENV === 'production'
     ? `https://jsonplaceholder.typicode.com`
     : `/api`;
 
-export const Posts = () => {
+export const Posts = (props: PostsProps) => {
+  const { onPostsLoad = () => {} } = props;
+
   const [posts, setPosts] = useState<Post[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -29,6 +35,7 @@ export const Posts = () => {
       .then(response => {
         setPosts(response.data);
         setIsLoading(false);
+        onPostsLoad();
       })
       .catch(error => {
         if (axios.isCancel(error)) {

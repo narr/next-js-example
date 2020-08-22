@@ -22,7 +22,7 @@ Cypress.Commands.add(
     reqAfterCallback,
     selectorToCheckUiRenderDone,
   }) => {
-    cy.setCookie('mock_server', 'true');
+    cy.setCookie('no_mock_api', 'false');
     cy.visit(url, {
       onBeforeLoad: win => {
         win.eval(window.parent.xhookResponse);

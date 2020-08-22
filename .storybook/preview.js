@@ -1,5 +1,6 @@
 import React from 'react';
 import { RouterContext } from 'next/dist/next-server/lib/router-context';
+import 'loki/configure-react';
 // NOTE: can add a global CSS
 
 export const parameters = {
