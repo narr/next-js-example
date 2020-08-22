@@ -14,6 +14,7 @@
     "test": "cross-env COVERAGE=true cypress open",
     "test:run": "cross-env COVERAGE=true cypress run --browser chrome --headless --config baseUrl=http://localhost:6007",
     "test:ci": "start-server-and-test storybook:ci http://localhost:6007 test:run",
+    "test:visual:install": "docker pull yukinying/chrome-headless-browser",
     "test:visual": "yarn loki test",
     "test:visual:filter": "loki test --storiesFilter",
     "test:visual:update": "loki update",

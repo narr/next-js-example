@@ -9,7 +9,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   base:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -30,7 +30,9 @@ jobs:
         run: yarn config set network-timeout 100000 -g
 
       - name: Install
-        run: yarn
+        run: |
+          yarn
+          yarn test:visual:install
 
       - name: Lint
         run: yarn lint
