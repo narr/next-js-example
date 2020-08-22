@@ -25,6 +25,10 @@ jobs:
           npm -v
           yarn -v
 
+      - name: Set up configs
+        # NOTE: https://github.com/dhis2/notes/issues/29#issue-421387830
+        run: yarn config set network-timeout 100000 -g
+
       - name: Install
         run: yarn
 
