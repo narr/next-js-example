@@ -12,6 +12,18 @@
 
 ## Getting Started
 
+### Install
+
+```bash
+# Install npm modules
+yarn
+# Install docker image for visual test
+# Prerequisite - Docker
+yarn test:visual:install
+```
+
+### Run
+
 First, run the development server:
 
 ```bash
@@ -38,6 +50,7 @@ Third, run visual regression tests:
 
 # to test all stories
 yarn storybook
+# Make sure that Docker is running before executing test
 yarn test:visual
 
 # to use regular expression for stories to test
