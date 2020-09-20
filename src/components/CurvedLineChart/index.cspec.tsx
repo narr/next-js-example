@@ -7,6 +7,7 @@ describe('CurvedLineChart', () => {
     });
 
     cy.wait(customConfigs.logWaitTime).get('svg').should('be.visible');
+    cy.get('svg').toMatchSnapshot();
   });
 });
 

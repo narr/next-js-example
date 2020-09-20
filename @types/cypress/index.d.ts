@@ -20,5 +20,6 @@ declare namespace Cypress {
       reqAfterCallback?: (request: any, response: any) => void;
       selectorToCheckUiRenderDone?: any[];
     }): VoidFunction;
+    toMatchSnapshot(): VoidFunction;
   }
 }

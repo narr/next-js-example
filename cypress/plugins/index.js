@@ -14,6 +14,7 @@
 
 const coverageTask = require('@cypress/code-coverage/task');
 const wp = require('@cypress/webpack-preprocessor');
+const { initPlugin: snapshot } = require('cypress-plugin-snapshots/plugin');
 
 /**
  * @type {Cypress.PluginConfig}
@@ -51,6 +52,8 @@ module.exports = (on, config) => {
       return launchOptions;
     }
   });
+
+  snapshot(on, config);
 
   // NOTE: IMPORTANT to return the config object
   // with the any changed environment variables

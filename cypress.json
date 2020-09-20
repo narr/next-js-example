@@ -11,7 +11,12 @@
     "logWaitTime": 0
   },
   "defaultCommandTimeout": 10000,
-  "ignoreTestFiles": ["**/examples/*.spec.*", "**/node_modules/**"],
+  "ignoreTestFiles": [
+    "**/examples/*.spec.*",
+    "**/node_modules/**",
+    "**/__snapshots__/*",
+    "**/__image_snapshots__/*"
+  ],
   "integrationFolder": ".",
   "testFiles": ["./cypress/integration/**/*.cspec.*", "./src/**/*.cspec.*"],
   "video": false,
