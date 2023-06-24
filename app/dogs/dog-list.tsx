@@ -2,7 +2,7 @@ import DogCard, { DogCardProps } from "./dog-card";
 
 export default function DogList({ dogs }: { dogs: DogCardProps[] }) {
   const imageClass: DogCardProps["imageClass"] = ["w-full", "h-[28rem]"];
-  console.log("DogList: dogs...", dogs);
+  // console.log("DogList: dogs...", dogs);
   return (
     <div
       className="grid grid-cols-[repeat(auto-fill,500px)] 

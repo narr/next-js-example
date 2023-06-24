@@ -9,6 +9,7 @@ import { getNewDogImage, updateDog } from "@/app/_actions/dog";
 import { useForm } from "react-hook-form";
 import StyledFormDevtool from "@/app/_components/styled-form-devtool";
 import { useLocalStorage, useEventListener } from "usehooks-ts";
+// import { useRouter } from "next/navigation";
 
 export type DogEditCardProps = {
   id: number;
@@ -48,6 +49,10 @@ export default function DogCardEdit({
     "__REACT_HOOK_FORM_DEVTOOLS__",
     {}
   );
+  const [cacheBusterUrl, setCacheBusterUrl] = useState(() => {
+    return `/dogs`;
+  });
+  // const router = useRouter();
 
   useEventListener("beforeunload", (e) => {
     console.log("beforeunload....", e);
@@ -64,6 +69,13 @@ export default function DogCardEdit({
     }
   }, [isSubmitSuccessful]);
 
+  useEffect(() => {
+    console.log(`🚀 ~ file: dog-card-edit.tsx:73 ~ cacheBuster:`);
+    // generate cacheBusterUrl only in client component to avoid hydration error
+    // e.g. app-index.js:32 Warning: Prop `href` did not match. Server: "/dogs?1687649072544" Client: "/dogs?1687649075438"
+    setCacheBusterUrl(`/dogs?${Date.now()}`);
+  }, []);
+
   const visibleInputFields = [
     {
       key: "name",
@@ -74,6 +86,16 @@ export default function DogCardEdit({
       value: breed,
     },
   ];
+
+  // NOTE: In build version, navigating by Link to previous page (/dogs) doesn't re-render
+  // the page and not getting updated dogs data if it is updated
+  // Moreover, it should add Cache Busting value to the URL
+  // const navigateToBackPage = () => {
+  //   console.log(`🚀 ~ file: dog-card-edit.tsx:84 ~ navigateToBackPage...`);
+  //   // with cache busting value
+  //   // Also better to add the existing searchParams too
+  //   router.push(`/dogs?${Date.now()}`);
+  // };
 
   return (
     <div
@@ -187,13 +209,24 @@ export default function DogCardEdit({
           </div>
         ))}
         <div className="pt-2 flex justify-between">
+          {/* <button
+            className="inline-block text-gray-900 bg-gradient-to-r from-teal-200 
+              to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 
+              hover:to-lime-200 focus:ring-4 focus:outline-none 
+              focus:ring-lime-200 dark:focus:ring-teal-700 font-medium 
+              rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 min-w-[8rem]"
+            onClick={navigateToBackPage}
+          >
+            &nbsp;&nbsp;BACK&nbsp;&nbsp;
+          </button> */}
           <Link
             className="inline-block text-gray-900 bg-gradient-to-r from-teal-200 
               to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 
               hover:to-lime-200 focus:ring-4 focus:outline-none 
               focus:ring-lime-200 dark:focus:ring-teal-700 font-medium 
               rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 min-w-[8rem]"
-            href="/dogs"
+            // NOTE: with cache busting value to update the page component in production
+            href={cacheBusterUrl}
           >
             &nbsp;&nbsp;BACK&nbsp;&nbsp;
           </Link>

@@ -1,11 +1,48 @@
+"use client";
+
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 export default function DogSearch({
-  onSearch = () => undefined,
+  dogSearchParamName,
+  defaultValue,
 }: {
-  onSearch?: (searchText: string) => void;
+  dogSearchParamName: string;
+  defaultValue?: string;
 }) {
   const [searchString, setSearchString] = useState("");
+
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const passSearchTextToUrl = () => {
+    const currentParams = new URLSearchParams(searchParams.toString());
+    console.log(
+      `🚀 ~ file: dog-search.tsx:21 ~ passSearchTextToUrl ~ searchParams & currentParams:`,
+      searchParams,
+      currentParams
+    );
+
+    if (searchString) {
+      currentParams.set(dogSearchParamName, encodeURIComponent(searchString));
+    } else {
+      currentParams.delete(dogSearchParamName);
+    }
+    const search = currentParams.toString();
+    const query = search ? `?${search}` : "";
+    const href = `${pathname}${query}`;
+    console.log(
+      `🚀 ~ file: dog-search.tsx:34 ~ passSearchTextToUrl ~ href:`,
+      href
+    );
+
+    // https://nextjs.org/docs/app/api-reference/functions/use-router#userouter
+    // router.refresh()
+    // router.replace(href: string)
+    router.push(`${pathname}${query}`);
+  };
+
   return (
     <div className="flex gap-6">
       <form
@@ -13,7 +50,7 @@ export default function DogSearch({
         onSubmit={(e) => {
           // prevent reload page
           e.preventDefault();
-          onSearch(searchString);
+          passSearchTextToUrl();
         }}
       >
         <label htmlFor="simple-search" className="sr-only">
@@ -51,6 +88,7 @@ export default function DogSearch({
             onChange={(e) => {
               setSearchString(e.target.value);
             }}
+            defaultValue={defaultValue}
           />
         </div>
         <button
