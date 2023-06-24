@@ -1,0 +1,51 @@
+"use server";
+
+import { prisma } from "@/app/utils/prisma";
+import type { Dog } from "@prisma/client";
+
+export async function getDogs() {
+  return prisma.dog.findMany({
+    take: 10,
+    orderBy: {
+      id: "desc",
+    },
+  });
+}
+
+export async function getDog(id: number) {
+  return prisma.dog.findUnique({
+    where: {
+      id,
+    },
+  });
+}
+
+export async function updateDog(dog: Dog) {
+  await prisma.dog.update({
+    where: {
+      id: dog.id,
+    },
+    data: dog,
+  });
+}
+
+export type DogResponse = {
+  message: string;
+};
+
+export async function getNewDogImage() {
+  const res = await fetch("https://dog.ceo/api/breeds/image/random", {
+    cache: "no-store",
+  });
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
+
+  // Recommendation: handle errors
+  // if (!res.ok) {
+  //   // This will activate the closest `error.js` Error Boundary
+  //   throw new Error("Failed to fetch data")
+  // }
+
+  const data = (await res.json()) as DogResponse;
+  return data.message;
+}

@@ -62,7 +62,7 @@ async function main() {
     count: 5,
     tableName: tableNames.user,
     createHelper: createUser,
-    log: "Seed Users and Posts",
+    logName: "Seed Users and Posts",
   });
 
   await seedData({
