@@ -1,14 +1,32 @@
 "use server";
 
 import { prisma } from "@/app/utils/prisma";
-import type { Dog } from "@prisma/client";
+import type { Prisma, Dog } from "@prisma/client";
 
-export async function getDogs() {
+export async function getDogs(searchText?: string) {
   return prisma.dog.findMany({
     take: 10,
     orderBy: {
       id: "desc",
     },
+    ...(searchText
+      ? {
+          where: {
+            OR: [
+              {
+                name: {
+                  search: searchText,
+                },
+              } as Prisma.DogWhereInput,
+              {
+                breed: {
+                  search: searchText,
+                },
+              } as Prisma.DogWhereInput,
+            ],
+          },
+        }
+      : null),
   });
 }
 

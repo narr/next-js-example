@@ -4,7 +4,7 @@ export type CardSkeletonProps = {
   imageClass?: [Tailwind["width"] | null, Tailwind["height"] | null];
 };
 
-export default async function CardSkeleton({
+export default function CardSkeleton({
   imageClass = ["w-96", "h-64"],
 }: CardSkeletonProps) {
   return (

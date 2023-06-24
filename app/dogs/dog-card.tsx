@@ -11,7 +11,7 @@ export type DogCardProps = {
   breed: string;
 };
 
-export default async function DogCard({
+export default function DogCard({
   id,
   imageClass = ["w-96", "h-64"],
   imageUrl,

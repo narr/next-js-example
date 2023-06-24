@@ -9,8 +9,8 @@
     "lint": "next lint",
     "analyze": "cross-env ANALYZE=true pnpm build",
     "prisma:generate": "prisma generate",
-    "prisma:migrate:dev": "dotenv -e .env.development -- prisma migrate dev",
-    "prisma:seed:dev": "dotenv -e .env.development -- node ./prisma/seed.mjs"
+    "prisma:migrate:dev": "dotenv -e .env.local -- prisma migrate dev",
+    "prisma:seed:dev": "dotenv -e .env.local -- node ./prisma/seed.mjs"
   },
   "dependencies": {
     "@faker-js/faker": "8.0.2",

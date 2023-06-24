@@ -2,7 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
@@ -25,14 +26,14 @@ model Post {
 }
 
 model Dog {
-  id        Int     @id @default(autoincrement())
-  name      String
-  imageUrl  String
-  breed     String
+  id       Int    @id @default(autoincrement())
+  name     String
+  imageUrl String
+  breed    String
 }
 
 model Cat {
-  id        Int     @id @default(autoincrement())
-  name      String
-  imageUrl  String
+  id       Int    @id @default(autoincrement())
+  name     String
+  imageUrl String
 }

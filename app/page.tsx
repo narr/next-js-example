@@ -81,7 +81,8 @@ export default function Home() {
         />
       </div>
 
-      <div className="mb-32 grid text-center lg:mb-16 lg:grid-cols-4 lg:text-left">
+      <div className="mt-28 mb-32 grid text-center lg:mb-16 lg:grid-cols-4 lg:text-left
+        lg:mt-0">
         {links.map((link, i) => (
           <Link
             key={i}
