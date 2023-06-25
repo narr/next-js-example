@@ -2,6 +2,7 @@
 
 import { prisma } from "@/app/utils/prisma";
 import type { Prisma, Dog } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 
 export async function getDogs(searchText?: string) {
   return prisma.dog.findMany({
@@ -45,6 +46,11 @@ export async function updateDog(dog: Dog) {
     },
     data: dog,
   });
+  // NOTE: This is important!
+  // need this to update data in pages that it is used
+  // no need cache busting
+  // revalidatePath("/dogs/[id]/edit")
+  revalidatePath(`/dogs/${dog.id}/edit`);
 }
 
 export type DogResponse = {

@@ -49,9 +49,9 @@ export default function DogCardEdit({
     "__REACT_HOOK_FORM_DEVTOOLS__",
     {}
   );
-  const [cacheBusterUrl, setCacheBusterUrl] = useState(() => {
-    return `/dogs`;
-  });
+  // const [cacheBusterUrl, setCacheBusterUrl] = useState(() => {
+  //   return `/dogs`;
+  // });
   // const router = useRouter();
 
   useEventListener("beforeunload", (e) => {
@@ -69,12 +69,12 @@ export default function DogCardEdit({
     }
   }, [isSubmitSuccessful]);
 
-  useEffect(() => {
-    console.log(`🚀 ~ file: dog-card-edit.tsx:73 ~ cacheBuster:`);
-    // generate cacheBusterUrl only in client component to avoid hydration error
-    // e.g. app-index.js:32 Warning: Prop `href` did not match. Server: "/dogs?1687649072544" Client: "/dogs?1687649075438"
-    setCacheBusterUrl(`/dogs?${Date.now()}`);
-  }, []);
+  // useEffect(() => {
+  //   console.log(`🚀 ~ file: dog-card-edit.tsx:73 ~ cacheBuster:`);
+  //   // generate cacheBusterUrl only in client component to avoid hydration error
+  //   // e.g. app-index.js:32 Warning: Prop `href` did not match. Server: "/dogs?1687649072544" Client: "/dogs?1687649075438"
+  //   // setCacheBusterUrl(`/dogs?${Date.now()}`);
+  // }, []);
 
   const visibleInputFields = [
     {
@@ -96,6 +96,7 @@ export default function DogCardEdit({
   //   // Also better to add the existing searchParams too
   //   router.push(`/dogs?${Date.now()}`);
   // };
+  // !!!! no need above, just use revalidatePath() in server action
 
   return (
     <div
@@ -226,7 +227,8 @@ export default function DogCardEdit({
               focus:ring-lime-200 dark:focus:ring-teal-700 font-medium 
               rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 min-w-[8rem]"
             // NOTE: with cache busting value to update the page component in production
-            href={cacheBusterUrl}
+            // href={cacheBusterUrl}
+            href="/dogs"
           >
             &nbsp;&nbsp;BACK&nbsp;&nbsp;
           </Link>
